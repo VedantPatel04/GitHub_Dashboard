@@ -3,4 +3,3 @@ __pycache__/
 *.pyc
 .env
 .pytest_cache/
-docs/Full_Sprint_Checklist.md
