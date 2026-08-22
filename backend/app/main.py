@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.health import router as health_router
 from app.api.dashboard import router as dashboard_router
+from app.config import get_settings
+
+get_settings()
 
 app = FastAPI(title="GitHub Dashboard API")
 

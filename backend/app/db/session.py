@@ -10,7 +10,7 @@ class Base(DeclarativeBase): # SQLAlchemy looks Base.metadata to know which tabl
 
 
 
-engine = create_engine( #long lived connection pool
+engine = create_engine( #long lived connection pool to the database
     get_settings().database_url,
     pool_pre_ping=True,
 )
