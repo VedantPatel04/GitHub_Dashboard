@@ -4,7 +4,7 @@ from alembic import context
 
 from app.config import get_settings
 from app.db.session import Base, engine
-
+from app.models import User, Repository, ActivityEvent, SyncRun
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
