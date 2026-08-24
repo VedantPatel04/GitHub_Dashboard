@@ -46,7 +46,7 @@ async def github_callback(
 
     async with httpx.AsyncClient() as client:
         try:
-            token_response = await client.post( #post to the GitHub url to get the access token payload
+            token_response = await client.post( #post to the GitHub url to get the GH access token
                 "https://github.com/login/oauth/access_token",
                 headers={"Accept": "application/json"}, #specifies what format GitHub should return the response in
                 data={
