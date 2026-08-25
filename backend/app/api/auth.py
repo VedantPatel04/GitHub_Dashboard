@@ -124,6 +124,6 @@ def get_session_me(request: Request, db: Session = Depends(get_db)):
 
 
 @router.post("/logout", status_code=204)
-def logout(request: Request):
+def logout(request: Request): # posts logout request and clears session cookies
     request.session.clear()
     return Response(status_code=204)
