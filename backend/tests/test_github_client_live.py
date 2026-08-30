@@ -14,9 +14,9 @@ from app.services.github_client import (
 
 @pytest.mark.live
 def test_github_client_with_token_from_postgres() -> None:
-    db = SessionLocal()
+    db = SessionLocal() #opens a db session 
     try:
-        user = db.execute(select(User)).scalars().first()
+        user = db.execute(select(User)).scalars().first() 
     finally:
         db.close()
 
@@ -34,8 +34,8 @@ def test_github_client_with_token_from_postgres() -> None:
             )
         raise
 
-    assert profile.get("login")
-
+    assert profile.get("login") #checks if "login" is present in JSON dict returned by geT_auth_user(token)
+                                # does NOT check if "login" == user.login
     owner, name = get_settings().github_repo_list()[0].split("/")
     repo = get_repository(token, owner, name)
     assert repo.get("id")
