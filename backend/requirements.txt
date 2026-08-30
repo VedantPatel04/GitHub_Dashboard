@@ -6,3 +6,4 @@ psycopg[binary]
 pydantic-settings
 httpx
 itsdangerous
+pytest
