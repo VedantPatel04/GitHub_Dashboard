@@ -34,13 +34,15 @@ def test_github_client_with_token_from_postgres() -> None:
             )
         raise
 
-    assert profile.get("login") #checks if "login" is present in JSON dict returned by geT_auth_user(token)
-                                # does NOT check if "login" == user.login
+    assert profile["id"] == user.github_id
+    assert profile["login"] == user.login
     owner, name = get_settings().github_repo_list()[0].split("/")
     repo = get_repository(token, owner, name)
-    assert repo.get("id")
-    assert repo.get("default_branch")
-    assert repo.get("full_name") == f"{owner}/{name}"
+    assert repo["id"]
+    assert repo["name"] == name
+    assert repo["owner"]["login"] == owner
+    assert repo["full_name"] == f"{owner}/{name}"
+    assert repo["default_branch"]
 
     commits = list_commits(
         token,
