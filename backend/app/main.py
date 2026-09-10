@@ -5,6 +5,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.api.health import router as health_router
 from app.api.dashboard import router as dashboard_router
 from app.api.auth import router as auth_router
+from app.api.sync_runs import router as sync_runs_router
 
 from app.config import get_settings
 
@@ -34,3 +35,4 @@ app.add_middleware(
 app.include_router(health_router)
 app.include_router(dashboard_router)
 app.include_router(auth_router)
+app.include_router(sync_runs_router)
