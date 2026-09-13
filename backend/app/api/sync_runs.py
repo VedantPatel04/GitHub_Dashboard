@@ -56,3 +56,23 @@ def create_sync_run(request: Request, db: Session = Depends(get_db)) -> SyncRun:
         db.refresh(run)
 
     return run
+
+
+@router.get("/sync-runs/{sync_run_id}", response_model=SyncRunPublic) # does not require access token
+def get_sync_run(
+    sync_run_id: int, request: Request, db: Session = Depends(get_db)
+) -> SyncRun:
+    user_id = request.session.get("user_id")
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    user = db.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    run = db.get(SyncRun, sync_run_id)
+    if not run:
+        raise HTTPException(status_code=404, detail="Sync run not found")
+
+    return run
+
