@@ -70,13 +70,13 @@ def list_commits(
 ) -> list[dict[str, Any]]:
     """GET /repos/{owner}/{name}/commits, following Link rel=next up to max_pages."""
     url: str | None = f"{GITHUB_API}/repos/{owner}/{name}/commits"
-    params: dict[str, Any] | None = {"per_page": 100}
+    params: dict[str, Any] | None = {"per_page": 100} # max 100 commits per page
     if sha:
         params["sha"] = sha
 
     commits: list[dict[str, Any]] = []
     with httpx.Client() as client:
-        for _ in range(max_pages):
+        for _ in range(max_pages): #stop at last page.
             if url is None:
                 break
             response = client.get(url, headers=_headers(token), params=params)
