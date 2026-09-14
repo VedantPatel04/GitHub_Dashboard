@@ -1,3 +1,11 @@
+"""
+Added by SessionMiddleware
+looks for cookie with name "session" in request headers
+verifies cookie signature using session_secret, decodes JSON payload and attaches to request.session
+
+If request.session is changed by a handler, resign the cookie
+"""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware

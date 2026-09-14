@@ -15,7 +15,7 @@ router = APIRouter(prefix="/api")
 
 @router.post("/sync-runs", response_model=SyncRunPublic)
 def create_sync_run(request: Request, db: Session = Depends(get_db)) -> SyncRun:
-    user_id = request.session.get("user_id")
+    user_id = request.session.get("user_id") # gets used_id from signed cookie request.session
     if not user_id:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
